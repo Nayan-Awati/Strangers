@@ -13,15 +13,15 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Strangers">
         <activity
-            android:name=".CallActivity"
+            android:name=".activites.CallActivity"
             android:exported="false" />
         <activity
-            android:name=".ConnectingActivity"
+            android:name=".activites.ConnectingActivity"
             android:exported="true">
 
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".activites.LoginActivity"
             android:exported="true" >
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
@@ -30,7 +30,7 @@
 <!--            </intent-filter>-->
         </activity>
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".activites.WelcomeActivity"
             android:exported="true">
 
              <intent-filter>
@@ -41,7 +41,7 @@
              </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activites.MainActivity"
             android:exported="true"></activity>
 
         <meta-data
