@@ -110,6 +110,7 @@
         app:srcCompat="@drawable/bg_blur" />
 
     <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_animation_heart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -118,12 +119,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/loadingHeart" />
+        app:lottie_rawRes="@raw/loading_heart" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/loadingGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:constraint_referenced_ids="imgConnecting" />
+        app:constraint_referenced_ids="imgConnecting,lottie_animation_heart" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

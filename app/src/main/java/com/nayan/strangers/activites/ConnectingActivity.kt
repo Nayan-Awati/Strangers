@@ -86,10 +86,11 @@ class ConnectingActivity : AppCompatActivity() {
                                     .child(username).addValueEventListener(object: ValueEventListener{
                                         override fun onDataChange(snapshot: DataSnapshot) {
                                             if(snapshot.child("status").exists()){
-                                                if(isOkay)
-                                                    return
-                                                isOkay = true
+
                                                 if(snapshot.child("status").getValue<Double>() == 1.0){
+                                                    if(isOkay)
+                                                        return
+                                                    isOkay = true
                                                     val intent = Intent(this@ConnectingActivity, CallActivity::class.java)
                                                     val incoming = snapshot.child("incoming").getValue<String>()
                                                     val createdBy = snapshot.child("createdBy").getValue<String>()

@@ -81,7 +81,6 @@ class CallActivity : AppCompatActivity() {
     fun setupWebView(){
         binding.webView.webChromeClient = object: WebChromeClient() {
             override fun onPermissionRequest(request: PermissionRequest?) {
-                super.onPermissionRequest(request)
                 request?.grant(request.resources)
             }
         }
@@ -95,7 +94,7 @@ class CallActivity : AppCompatActivity() {
     }
 
     public fun loadVideoCall(){
-        val filePath = "file:android_assets/call.html"
+        val filePath = "file:android_asset/call.html"
         binding.webView.loadUrl(filePath)
         binding.webView.webViewClient = object : WebViewClient(){
             override fun onPageFinished(view: WebView?, url: String?) {
