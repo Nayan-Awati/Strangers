@@ -30,6 +30,9 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         auth = FirebaseAuth.getInstance()
+        if(auth.currentUser != null){
+            moveToNextActivity()
+        }
         databaseFb = FirebaseDatabase.getInstance("https://strangervideocall-7b5e1-default-rtdb.asia-southeast1.firebasedatabase.app")
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -48,6 +51,11 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun moveToNextActivity(){
+        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+        finish()
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode ==  RC_SIGN_IN){
@@ -57,6 +65,7 @@ class LoginActivity : AppCompatActivity() {
 
         }
     }
+
 
     private fun authWithGoogle(idToken: String){
         val credential = GoogleAuthProvider.getCredential(idToken, null)

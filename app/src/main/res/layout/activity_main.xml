@@ -44,7 +44,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageView5">
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/txt_coins"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -97,7 +97,7 @@
         app:lottie_rawRes="@raw/radar" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image"
+        android:id="@+id/img_profile"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:src="@drawable/demo_user"
@@ -172,12 +172,12 @@
         android:id="@+id/btnFind"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="@color/green"
         android:text="Find"
         app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="@+id/textView7"
         app:layout_constraintStart_toStartOf="@+id/textView7"
-        app:layout_constraintTop_toBottomOf="@+id/llHeader" />
+        app:layout_constraintTop_toBottomOf="@+id/llPrice" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
