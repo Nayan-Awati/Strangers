@@ -1,6 +1,7 @@
 package com.nayan.strangers.activites
 
 import android.annotation.SuppressLint
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -72,12 +73,11 @@ class CallActivity : AppCompatActivity() {
         }
 
         binding.btnEndCall.setOnClickListener {
-            onDestroy()
+            finish()
         }
 
     }
 
-    @SuppressLint("JavascriptInterface")
     fun setupWebView(){
         binding.webView.webChromeClient = object: WebChromeClient() {
             override fun onPermissionRequest(request: PermissionRequest?) {
@@ -86,14 +86,14 @@ class CallActivity : AppCompatActivity() {
         }
         binding.webView.settings.javaScriptEnabled = true
         binding.webView.settings.mediaPlaybackRequiresUserGesture = false
-        binding.webView.addJavascriptInterface(InterfaceKotlin(this@CallActivity)::class.java, "Android")
+        binding.webView.addJavascriptInterface(InterfaceKotlin(this@CallActivity), "Android")
 
         //loadVideoCall
         loadVideoCall()
 
     }
 
-    public fun loadVideoCall(){
+    fun loadVideoCall(){
         val filePath = "file:android_asset/call.html"
         binding.webView.loadUrl(filePath)
         binding.webView.webViewClient = object : WebViewClient(){
@@ -101,8 +101,6 @@ class CallActivity : AppCompatActivity() {
                 super.onPageFinished(view, url)
                 //initalize Peer
                 initializePeer()
-
-
             }
         }
 
@@ -111,6 +109,7 @@ class CallActivity : AppCompatActivity() {
     private fun initializePeer(){
         uniqueId = getUniqueId()
         callJsFunction("javascript:init(\"$uniqueId\")")
+
         if(createdBy.equals(username, ignoreCase = true)){
             if(pageExit)
                 return
@@ -119,7 +118,7 @@ class CallActivity : AppCompatActivity() {
             binding.loadingGroup.visibility = View.GONE
             binding.controls.visibility = View.VISIBLE
 
-            FirebaseDatabase.getInstance().reference
+            FirebaseDatabase.getInstance("https://strangervideocall-7b5e1-default-rtdb.asia-southeast1.firebasedatabase.app").reference
                 .child("profiles")
                 .child(friendUsername)
                 .addListenerForSingleValueEvent(object: ValueEventListener{
@@ -140,9 +139,9 @@ class CallActivity : AppCompatActivity() {
 
         }else{
             Handler().postDelayed({
-                kotlin.run {
+
                     friendUsername = createdBy
-                    FirebaseDatabase.getInstance().reference
+                    FirebaseDatabase.getInstance("https://strangervideocall-7b5e1-default-rtdb.asia-southeast1.firebasedatabase.app").reference
                         .child("profiles")
                         .child(friendUsername)
                         .addListenerForSingleValueEvent(object: ValueEventListener{
@@ -160,7 +159,7 @@ class CallActivity : AppCompatActivity() {
                                 TODO("Not yet implemented")
                             }
                         })
-                    FirebaseDatabase.getInstance().reference
+                    FirebaseDatabase.getInstance("https://strangervideocall-7b5e1-default-rtdb.asia-southeast1.firebasedatabase.app").reference
                         .child("users")
                         .child(friendUsername)
                         .child("connId")
@@ -177,12 +176,12 @@ class CallActivity : AppCompatActivity() {
                             }
 
                         })
-                }
+
             },3000)
         }
 
     }
-    public fun onPeerConneted(){
+    fun onPeerConnected(){
         isPeerConnected = true
     }
 
@@ -216,11 +215,7 @@ class CallActivity : AppCompatActivity() {
     }
 
     private fun callJsFunction(function: String){
-        binding.webView.post {
-            kotlin.run {
-                binding.webView.evaluateJavascript(function, null)
-            }
-        }
+        binding.webView.evaluateJavascript(function, null)
     }
 
 

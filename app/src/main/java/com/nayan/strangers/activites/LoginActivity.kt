@@ -73,7 +73,7 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener {
                 if(it.isSuccessful){
                     val user: FirebaseUser? = auth.currentUser
-                    val firebaseUser = User(user?.uid.toString(), user?.displayName.toString(), user?.photoUrl.toString(), "-", 500)
+                    val firebaseUser = User(user?.uid.toString(), user?.displayName.toString(), user?.photoUrl.toString(), "New Delhi", 500)
                     databaseFb.reference
                         .child("profiles")
                         .child(user?.uid.toString())
